@@ -14,7 +14,7 @@ const map = new ol.Map({
 const csw_url = 'http://192.168.178.27:8080/geonetwork/srv/en/csw'
 const number_of_results = 10
 const startposition = 1
-
+let records = []
 
 csw_request = '<csw:GetRecords maxRecords="' + number_of_results + '" startPosition="' + startposition + '" outputFormat="application/xml" outputSchema="http://www.isotc211.org/2005/gmd" resultType="results" service="CSW" version="2.0.2" xsi:schemaLocation="http://www.opengis.net/cat/csw/2.0.2 http://schemas.opengis.net/csw/2.0.2/CSW-discovery.xsd" xmlns:ogc="http://www.opengis.net/ogc" xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><csw:Query typeNames="csw:Record"><csw:ElementSetName>full</csw:ElementSetName>';
 csw_request += '</csw:Query></csw:GetRecords>';
@@ -37,15 +37,15 @@ $.ajax({
 
         $(xml).find('gmd\\:MD_Metadata').each(function(record) {
 
-            var id = $(xml).find('gmd\\:fileIdentifier').children().text();
-            var title = $(xml).find('gmd\\:identificationInfo').find('gmd\\:citation').find('gmd\\:title').children().text();
-            var abstract = $(xml).find('gmd\\:identificationInfo').find('gmd\\:abstract').children().text();
+            var id = $(this).find('gmd\\:fileIdentifier').children().text();
+            var title = $(this).find('gmd\\:identificationInfo').find('gmd\\:citation').find('gmd\\:title').children().text();
+            var abstract = $(this).find('gmd\\:identificationInfo').find('gmd\\:abstract').children().text();
             
             var BBOX = []
-            var westBoundLongitude = $(xml).find('gmd\\:identificationInfo').find('gmd\\:EX_GeographicBoundingBox').find('gmd\\:westBoundLongitude').children().text();
-            var eastBoundLongitude = $(xml).find('gmd\\:identificationInfo').find('gmd\\:EX_GeographicBoundingBox').find('gmd\\:eastBoundLongitude').children().text();
-            var southBoundLatitude = $(xml).find('gmd\\:identificationInfo').find('gmd\\:EX_GeographicBoundingBox').find('gmd\\:southBoundLatitude').children().text();
-            var northBoundLatitude = $(xml).find('gmd\\:identificationInfo').find('gmd\\:EX_GeographicBoundingBox').find('gmd\\:northBoundLatitude').children().text();
+            var westBoundLongitude = $(this).find('gmd\\:identificationInfo').find('gmd\\:EX_GeographicBoundingBox').find('gmd\\:westBoundLongitude').children().text();
+            var eastBoundLongitude = $(this).find('gmd\\:identificationInfo').find('gmd\\:EX_GeographicBoundingBox').find('gmd\\:eastBoundLongitude').children().text();
+            var southBoundLatitude = $(this).find('gmd\\:identificationInfo').find('gmd\\:EX_GeographicBoundingBox').find('gmd\\:southBoundLatitude').children().text();
+            var northBoundLatitude = $(this).find('gmd\\:identificationInfo').find('gmd\\:EX_GeographicBoundingBox').find('gmd\\:northBoundLatitude').children().text();
             BBOX.push(westBoundLongitude)
             BBOX.push(eastBoundLongitude)
             BBOX.push(southBoundLatitude)
@@ -53,8 +53,23 @@ $.ajax({
 
             console.log(id, title, abstract, BBOX)
 
-            $("#table-csw-results").append("<tr><th data-id='" + id + "'>Test</th></tr>");
+            records.push({id: id, BBOX: BBOX});
+
+            console.log(records)
+
+            $("#table-csw-results").append("<tr><th data-id='" + id + "'>"+ title +"</th></tr>");
 
         })
     }
+});
+
+$(document).ready(function(){
+
+    $("table").on("mouseenter", "th", function(event) {
+        let id = $(this).data("id")
+        console.log(id)
+        let entry = records.find(e => e.id === id);
+        console.log(entry.BBOX)
+    });
+
 });
