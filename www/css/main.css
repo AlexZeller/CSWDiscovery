@@ -1,8 +1,50 @@
 html, body {
     height: 100%;
+    
    
 }
 
 #map {
-    min-height: 100%;
+    height: 600px;
+    width: 100%;
 }
+
+
+#results {
+    overflow-y: auto;
+    height:700px;
+}
+
+#Header {
+    background-color: #0064a0;
+    height: 40px;
+    color: white;
+    font-size: 20px;
+}
+
+#Toolbar {
+    background-color: aliceblue;
+    height: 30px;
+    color: white;
+    font-size: 20px;
+}
+
+#search-input {
+    padding-right: 33px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+#recordsNumber {
+    text-align: center;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a {
+    color: black;
+}
+
+
