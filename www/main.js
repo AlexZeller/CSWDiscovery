@@ -61,7 +61,7 @@ function styleEntry(rec){
 
 
 //url of CSW
-const csw_url = 'http://136.199.176.14:8080/geonetwork/srv/en/csw'
+const csw_url = 'http://192.168.178.27:8080/geonetwork/srv/en/csw'
 
 //Parameters for CSW GetRecords
 const number_of_results = 10

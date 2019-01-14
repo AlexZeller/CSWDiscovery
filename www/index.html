@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="en">
   <head>
+
+     <link rel="shortcut icon" href="img/Logo.png" type="image/x-icon">
+     <title>CSWDiscovery</title>
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
     integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
@@ -25,7 +28,7 @@
 
     <div class="container-fluid h-100 ">
         <div class="row">
-          <div class="col-12" id="Header"><strong>CSWDiscovery</strong></div>
+          <div class="col-12" id="Header"><span><strong>CSWDiscovery</strong></span></div>
         </div>
         <div class="row">
             <div class="col-12" id="Toolbar">Header2</div>
@@ -51,19 +54,21 @@
         </div>
         <div class="row">
           <div class="col-8"></div>
-          <div class="col-4"><small><strong id="recordsNumber"></strong></small></div>
+          <div class="col-4 text-center"><small><strong id="recordsNumber"></strong></small></div>
         </div>
         <div class="row">
             <div class="col-8"></div>
-            <div class="col-4">
-                <ul class="pagination">
+            <div class="col-4 text-center">
+                <ul id="pager" class="pagination justify-content-center">
                     <li class="page-item" id="li-previous"><a class="page-link" id="a-previous" href="#">Previous</a></li>
                     <li class="page-item" id="li-next"><a class="page-link" id="a-next" href="#">Next</a></li>
                   </ul>
             </div>
           </div>
         <div class="row">
-            <div class="col-12"></div>
+            <div class="col-12">
+                <img id="logo_footer" src="img/logo_long.png">
+            </div>
         </div>
     </div>
  
