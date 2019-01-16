@@ -4,6 +4,8 @@
 
      <link rel="shortcut icon" href="img/Logo.png" type="image/x-icon">
      <title>CSWDiscovery</title>
+
+
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
     integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
@@ -20,6 +22,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+
     <!-- Main CSS -->
     <link rel="stylesheet" href="css/main.css" type="text/css">
   </head>
@@ -30,12 +38,27 @@
         <div class="row">
           <div class="col-12" id="Header"><span><strong>CSWDiscovery</strong></span></div>
         </div>
-        <div class="row">
-            <div class="col-12" id="Toolbar">Header2</div>
+        <div class="row" style="font-size:12px;">
+            <div class="col-4">
+              <b><u>Temporal Filter</u></b>
+            </div>
+            <div class="col-4">
+              <b><u>Spatial Filter</u></b>
+            </div>
+            <div class="col-4" style="padding-left:0px;">
+              <b><u>Free Text Filter</u></b>
+            </div>
         </div>
-        <div class="row">
-            <div class="col-8">
-              <div></div>
+        <div class="row" style="padding-top:10px;">
+            <div class="col-4" style="padding-top:3px;">
+              <div>
+                <input id="datepicker" type="text" name="daterange" value="" placeholder="Date"/>
+              </div>
+            </div>
+            <div class="col-4">
+                <div id="spatialFilter">
+                  <label><input type="checkbox" id="input-spatialFilter" /> <small>Enable Filter By Map Bounds</small></label>
+                </div>
             </div>
             <div class="col-4" id="search-input">
                <input class="form-control" type="text" placeholder="Search" id="input-anytext">

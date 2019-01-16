@@ -7,6 +7,9 @@ html, body {
 #map {
     height: 700px;
     width: 100%;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ced4da;
 }
 
 
@@ -37,7 +40,7 @@ span {
     height: 45px;
     color: white;
     font-size: 25px;
-    font-family: "Lucida Console", Monaco, monospace;
+    font-family: "Verdana", Geneva, sans-serif;
 }
 
 #Toolbar {
@@ -48,8 +51,7 @@ span {
 }
 
 #search-input {
-    padding-bottom: 5px;
-    padding-top: 5px;
+    padding-bottom: 10px;
     padding-left: 0px;
 }
 
@@ -63,6 +65,18 @@ a:link {
 
 a {
     color: black;
+}
+
+#datepicker {
+    width: 200px;
+    padding: 4px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+}
+
+#Zoom {
+    float: right;
+    cursor: pointer;
 }
 
 
