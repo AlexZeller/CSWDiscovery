@@ -1,15 +1,15 @@
-//url of CSW
-const csw_url = 'http://192.168.178.27:8080/geonetwork/srv/en/csw'
+//url of Geonetwork CSW
+const csw_ip = '192.168.178.27:8080'
+const csw_url = 'http://' + csw_ip + '/geonetwork/srv/en/csw'
 
 //define Leaflet map, set view on lat/lon coordinates of Trier
-var map = L.map('map').setView([49.76, 6.648387], 5);
+const map = L.map('map').setView([49.76, 6.648387], 5);
 //use openstreetmap as basemap
-basemap = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+const basemap = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 })
 //add basemap to map
 map.addLayer(basemap);
-
 
 //list of current records; used to find the matching BBOX when hovered over entry
 let records = []
@@ -25,7 +25,7 @@ let matched;
 let nextrecord;
 let start;
 
-//Temportal filter values
+//global Temportal filter values
 let startDate
 let endDate
 
@@ -40,11 +40,14 @@ function getRecords(startPosition) {
         startPosition = 1;
     }
 
+    //start position to calculate previous record
     start = startPosition
 
-    var freetext = $('#input-anytext').val().trim();
-    var bbox_enabled = $('#input-spatialFilter').is(':checked');
+    //get input of freetext and if the spatial filter is enabled
+    let freetext = $('#input-anytext').val().trim();
+    let bbox_enabled = $('#input-spatialFilter').is(':checked');
 
+    //build csw request to post
     csw_request = buildCSWRequest(startPosition, bbox_enabled, freetext, startDate, endDate)
 
     $.ajax({
@@ -56,17 +59,18 @@ function getRecords(startPosition) {
         success: function (xml) {
 
             $('#table-csw-results').empty();
-            //console.log(xml);
             // derive results for paging
             matched = $(xml).find('csw\\:SearchResults').attr('numberOfRecordsMatched');
             nextrecord = $(xml).find('csw\\:SearchResults').attr('nextRecord');
 
+            //if no records are found display "No results"
             if (matched == 0) {
                 $('#table-csw-results').html('<tr><td>No results</td></tr>');
                 $('#recordsNumber').html('');
                 return;
             }
 
+            //Dis/Enable previous/next button based on position
             if (nextrecord == 0 || nextrecord >= matched) {
                 $('#li-next').addClass('disabled');
                 nextrecord = matched;
@@ -80,37 +84,35 @@ function getRecords(startPosition) {
                 $('#li-previous').removeClass('disabled');;
             }
 
+            //display number of records information
             $("#recordsNumber").text(startPosition + " - " + nextrecord + " of " + matched + " Record(s)");
 
+            //Iterate through the records, style the information and append to table
             $(xml).find('gmd\\:MD_Metadata').each(function (record) {
-
                 let rec = new CswRecord($(this));
                 $("#table-csw-results").append(styleEntry(rec));
             })
         }
     });
-
 }
-
-
 
 $(document).ready(function () {
 
+    //get no constraint records at first load of the page
     getRecords();
 
+    //on mouseenter display the corresponding bounding box in the map
     $("table").on("mouseenter", "td", function (event) {
         let id = $(this).data("id")
-        //console.log(id)
         let entry = records.find(e => e.id === id);
-        //console.log(entry.BBOX)
         if (map.hasLayer(BBOX_Layer)) {
             map.removeLayer(BBOX_Layer);
         }
-
         BBOX_Layer = BBOX2polygon(entry.BBOX)
         map.addLayer(BBOX_Layer)
     });
 
+    //previous button
     $('#a-previous').click(function (event) {
         event.preventDefault();
         startposition2 = start - number_of_results;
@@ -119,6 +121,7 @@ $(document).ready(function () {
         }
         getRecords(startposition2);
     });
+    //next button
     $('#a-next').click(function (event) {
         event.preventDefault();
         if (nextrecord == 0 || nextrecord >= matched) {
@@ -126,7 +129,7 @@ $(document).ready(function () {
         }
         getRecords(nextrecord);
     });
-
+    //getRecords on Enter for text input
     $("#input-anytext").keypress(function (e) {
         if (e.keyCode == 13) { // Enter key pressed, but not submitting the form to a page refresh
             getRecords();
@@ -134,6 +137,7 @@ $(document).ready(function () {
         }
     });
 
+    //define the datepicker
     $('#datepicker').daterangepicker({
         "showDropdowns": true,
         "autoUpdateInput": false,
@@ -175,22 +179,20 @@ $(document).ready(function () {
         "maxDate": "1/1/2050"
     });
 
+    //on apply set the values for the date range
     $('input[name="daterange"]').on('apply.daterangepicker', function (ev, picker) {
         $(this).val(picker.startDate.format('DD.MM.YYYY') + ' - ' + picker.endDate.format('DD.MM.YYYY'));
         startDate = picker.startDate.format('YYYY-MM-DD')
         endDate = picker.endDate.format('YYYY-MM-DD')
-        console.log(startDate, endDate)
-
     });
-
+    //on cancel delete date range values
     $('input[name="daterange"]').on('cancel.daterangepicker', function (ev, picker) {
         $(this).val('');
         startDate = null
         endDate = null
         console.log(startDate, endDate)
     });
-
-
+    //refresh records on mouse move while spatial filter is enabled
     map.on('move', function () {
         var bbox_enabled = $('#input-spatialFilter').is(':checked');
         if (bbox_enabled != false) {

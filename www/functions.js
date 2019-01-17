@@ -44,7 +44,7 @@ function CswRecord(xml) {
 function styleEntry(rec) {
     let snippet
     snippet += "<tr><td data-id='" + rec.id + "'>"
-    link = 'http://136.199.176.14:8080/geonetwork/srv/ger/catalog.search#/metadata/' + rec.id
+    link = 'http://' + csw_ip + '/geonetwork/srv/ger/catalog.search#/metadata/' + rec.id
     snippet += "<strong>" + rec.title + "</strong>"
     snippet += "<div id='Zoom'><img src='img/search.png' onclick='ZoomToBBOX()'></div></br>"
     snippet += "<small><i><a href='" + link + "' target='_blank'>" + rec.id + "</a></i></small></br>"
