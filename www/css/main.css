@@ -32,7 +32,8 @@ span {
 }
 
 #pager {
-    padding: 10px;
+    padding-top: 6px;
+    margin-bottom: 2px;
 }
 
 #Header {
@@ -50,9 +51,17 @@ span {
     font-size: 20px;
 }
 
-#search-input {
-    padding-bottom: 10px;
-    padding-left: 0px;
+#ShowNumberRecords{
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.form-control {
+    width: 100%;
+    font-size: 12px;
+    height: 30px;
+
+    text-align: center;
 }
 
 #recordsNumber {
@@ -68,15 +77,152 @@ a {
 }
 
 #datepicker {
-    width: 200px;
+    width: 100%;
     padding: 4px;
     border-radius: 4px;
     border: 1px solid #ced4da;
+    text-align: center;
+}
+
+#ToggleSpatial {
+    padding-top: 12px; 
+}
+
+#InputText {
+    padding-top: 8px; 
+}
+
+#InputDate {
+    padding-top: 8px; 
+}
+
+#TextFilter {
+    background-color: #dee2e6;
+    padding: 5px;
+    border-style: solid;
+    border-color: #ced4da;
+    border-width: 1px;
+}
+
+#TemporalFilter {
+    background-color: #dee2e6;
+    padding: 5px;
+    border-style: solid;
+    border-color: #ced4da;
+    border-width: 1px;
+}
+
+#SpatialFilter {
+    background-color: #dee2e6;
+    padding: 5px;
+    border-style: solid;
+    border-color: #ced4da;
+    border-width: 1px;
+}
+
+#Options {
+    background-color: #dee2e6;
+    padding: 5px;
+    border-style: solid;
+    border-color: #ced4da;
+    border-width: 1px;
+}
+
+.Description {
+    padding-bottom: 4px;
+}
+
+#UserInput {
+    font-size:12px;
+    padding: 5px 15px 5px 15px;
+    
 }
 
 #Zoom {
     float: right;
     cursor: pointer;
 }
+
+#XML {
+    float: right;
+    cursor: pointer;
+    position: relative;
+    right: 30px;
+    top: -25px;
+}
+
+#Description {
+    font-weight: bold;
+    color: gray;
+}
+  
+.tooltip {
+    font-size: 12px;
+}
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 28px;
+    height: 18px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+background-color: #2196F3;
+}
+
+input:focus + .slider {
+box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+-webkit-transform: translateX(10px);
+-ms-transform: translateX(10px);
+transform: translateX(10px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  
+
 
 

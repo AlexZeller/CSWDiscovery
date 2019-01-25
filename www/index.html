@@ -1,102 +1,217 @@
 <!doctype html>
 <html lang="en">
-  <head>
 
-     <link rel="shortcut icon" href="img/Logo.png" type="image/x-icon">
-     <title>CSWDiscovery</title>
+<head>
+
+  <link rel="shortcut icon" href="img/Logo.png" type="image/x-icon">
+  <title>CSWDiscovery</title>
 
 
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
-    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
-    crossorigin=""/>
-     <!-- LEaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
-    integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+    crossorigin="" />
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
     crossorigin=""></script>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <!-- JQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!-- Popper -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+  <!-- Leaflet.Deflate -->
+  <script src="https://unpkg.com/Leaflet.Deflate@1.0.0-alpha.5/dist/L.Deflate.js"></script>
+  <!-- Leaflet.markercluster -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+  <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+    crossorigin="anonymous">
+  <!-- JQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Popper -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="css/main.css" type="text/css">
-  </head>
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/main.css" type="text/css">
+</head>
 
-  <body>
-
-    <div class="container-fluid h-100 ">
+<body>
+  <div class="container-fluid h-100 ">
+    <div class="row">
+      <div class="col-12" id="Header"><span><strong>CSWDiscovery</strong></span></div>
+    </div>
+    <div class="row" id="UserInput">
+      <div class="col-3" id="TextFilter">
         <div class="row">
-          <div class="col-12" id="Header"><span><strong>CSWDiscovery</strong></span></div>
+          <div class="col-12 Description">
+            <b><u>Free Text Filter</u></b>
+          </div>
         </div>
-        <div class="row" style="font-size:12px;">
-            <div class="col-4">
-              <b><u>Temporal Filter</u></b>
-            </div>
-            <div class="col-4">
-              <b><u>Spatial Filter</u></b>
-            </div>
-            <div class="col-4" style="padding-left:0px;">
-              <b><u>Free Text Filter</u></b>
-            </div>
+        <div class="row" id="InputText">
+          <div class="col-12" id="search-input">
+            <input class="form-control" type="text" placeholder="Search for Any Text" id="input-anytext" data-toggle="tooltip"
+              title="Enter any text to filter the records">
+          </div>
         </div>
-        <div class="row" style="padding-top:10px;">
-            <div class="col-4" style="padding-top:3px;">
-              <div>
-                <input id="datepicker" type="text" name="daterange" value="" placeholder="Date"/>
+      </div>
+      <div class="col-2" id="TemporalFilter">
+        <div class="row">
+          <div class="col-12 Description">
+            <b><u>Temporal Filter</u></b>
+          </div>
+        </div>
+        <div class="row" id="InputDate">
+          <div class="col-12">
+            <input id="datepicker" type="text" name="daterange" value="" placeholder="Search for Date Range"
+              autocomplete="off" />
+          </div>
+        </div>
+      </div>
+      <div class="col-2" id="SpatialFilter">
+        <div class="row">
+          <div class="col-12 Description">
+            <b><u>Spatial Filter</u></b>
+          </div>
+        </div>
+        <div class="row" id="ToggleSpatial">
+          <div class="col-2">
+            <label class="switch">
+              <input type="checkbox" id="input-spatialFilter">
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="col-10">
+            Filter by Map Bounds
+          </div>
+        </div>
+      </div>
+      <div class="col-5" id="Options">
+        <div class="row">
+          <div class="col-12 Description">
+            <b><u>Options</u></b>
+          </div>
+        </div>
+        <div class="row no-gutters">
+          <div class="col-4">
+            <div class="row no-gutters">
+              <div class="col-2">
+                <label class="switch">
+                  <input type="checkbox" id="input-numberRecordsFilter">
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              <div class="col-10">
+                Show all available Records
               </div>
             </div>
-            <div class="col-4">
-                <div id="spatialFilter">
-                  <label><input type="checkbox" id="input-spatialFilter" /> <small>Enable Filter By Map Bounds</small></label>
-                </div>
-            </div>
-            <div class="col-4" id="search-input">
-               <input class="form-control" type="text" placeholder="Search" id="input-anytext">
-            </div>
-        </div>
-        <div class="row">
-          <div class="col-8">
-            <div id="map" class="map"></div>
           </div>
-          <div id="results" class="col-4">
-            <table class="table table-bordered table-striped" >
-              <tbody id="table-csw-results"> 
-              </tbody> 
-            </table>  
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-8"></div>
-          <div class="col-4 text-center"><small><strong id="recordsNumber"></strong></small></div>
-        </div>
-        <div class="row">
-            <div class="col-8"></div>
-            <div class="col-4 text-center">
-                <ul id="pager" class="pagination justify-content-center">
-                    <li class="page-item" id="li-previous"><a class="page-link" id="a-previous" href="#">Previous</a></li>
-                    <li class="page-item" id="li-next"><a class="page-link" id="a-next" href="#">Next</a></li>
-                  </ul>
+          <div class="col-4">
+            <div class="row no-gutters">
+              <div class="col-2">
+                <label class="switch">
+                  <input type="checkbox" id="input-markBBOX">
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              <div class="col-10">
+                Disable Mark BBOX on hover
+              </div>
             </div>
           </div>
-        <div class="row">
-            <div class="col-12">
-                <img id="logo_footer" src="img/logo_long.png">
+          <div class="col-4">
+            <div class="row no-gutters">
+              <div class="col-2">
+                <label class="switch">
+                  <input type="checkbox">
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              <div class="col-10">
+                Option
+              </div>
             </div>
+          </div>
         </div>
+        <div class="row no-gutters">
+          <div class="col-4">
+            <div class="row no-gutters">
+              <div class="col-12">
+                Show
+                <select id="ShowNumberRecords" name="ShowNumberRecords" form="ShowNumberRecords">
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="100" selected="selected">100</option>
+                </select>
+                Records
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="row no-gutters">
+              <div class="col-2">
+                <label class="switch">
+                  <input type="checkbox">
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              <div class="col-10">
+                Option
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="row no-gutters">
+              <div class="col-2">
+                <label class="switch">
+                  <input type="checkbox">
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              <div class="col-10">
+                Option
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
- 
-    <!-- Main JS -->
-    <script type="text/javascript" src="main.js"></script>
-    <script type="text/javascript" src="functions.js"></script>
-  </body>
+    <div class="row">
+      <div class="col-8">
+        <div id="map" class="map"></div>
+      </div>
+      <div id="results" class="col-4">
+        <table class="table table-bordered table-striped">
+          <tbody id="table-csw-results">
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8"></div>
+      <div class="col-4 text-center"><small><strong id="recordsNumber"></strong></small></div>
+    </div>
+    <div class="row">
+      <div class="col-8">
+          <img id="logo_footer" src="img/logo_long.png">
+      </div>
+      <div class="col-4 text-center">
+        <ul id="pager" class="pagination justify-content-center">
+          <li class="page-item" id="li-previous"><a class="page-link" id="a-previous" href="#">Previous</a></li>
+          <li class="page-item" id="li-next"><a class="page-link" id="a-next" href="#">Next</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main JS -->
+  <script type="text/javascript" src="main.js"></script>
+  <script type="text/javascript" src="functions.js"></script>
+</body>
+
 </html>

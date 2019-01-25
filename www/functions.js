@@ -14,7 +14,8 @@ function BBOX2polygon(BBOX) {
 
 //function to zoom to the current BBOX layer
 function ZoomToBBOX() {
-    map.fitBounds(BBOX_Layer.getBounds())
+    //map.fitBounds(BBOX_Layer.getBounds())
+    map.flyToBounds(BBOX_Layer.getBounds())
 }
 
 //function to get the info of a record of the CSW response 
@@ -23,6 +24,9 @@ function CswRecord(xml) {
     this.title = $(xml).find('gmd\\:identificationInfo').find('gmd\\:citation').find('gmd\\:title').children().text();
     this.abstract = $(xml).find('gmd\\:identificationInfo').find('gmd\\:abstract').children().text();
     this.location = $(xml).find('gmd\\:distributionInfo').find('gmd\\:title').children().text();
+    this.date = $(xml).find('gmd\\:identificationInfo').find('gmd\\:EX_TemporalExtent').children().text();
+    resolution = $(xml).find('gmd\\:spatialResolution').find('gmd\\:distance').children().text();
+    this.resolution = parseFloat(resolution)
     let BBOX = []
     this.westBoundLongitude = $(xml).find('gmd\\:identificationInfo').find('gmd\\:EX_GeographicBoundingBox').find('gmd\\:westBoundLongitude').children().text();
     this.eastBoundLongitude = $(xml).find('gmd\\:identificationInfo').find('gmd\\:EX_GeographicBoundingBox').find('gmd\\:eastBoundLongitude').children().text();
@@ -44,12 +48,15 @@ function CswRecord(xml) {
 function styleEntry(rec) {
     let snippet
     snippet += "<tr><td data-id='" + rec.id + "'>"
-    link = 'http://' + csw_ip + '/geonetwork/srv/ger/catalog.search#/metadata/' + rec.id
-    snippet += "<strong>" + rec.title + "</strong>"
+    link_record = 'http://' + csw_ip + '/geonetwork/srv/ger/catalog.search#/metadata/' + rec.id
+    link_xml = 'http://' + csw_ip + '/geonetwork/srv/api/records/' + rec.id + '/formatters/xml'
+    snippet += "<strong><a href='" + link_record + "' target='_blank' data-toggle='tooltip' title='Click to get to the Geonetwork Entry'>"+ rec.title + "</a></strong>"
     snippet += "<div id='Zoom'><img src='img/search.png' onclick='ZoomToBBOX()'></div></br>"
-    snippet += "<small><i><a href='" + link + "' target='_blank'>" + rec.id + "</a></i></small></br>"
-    snippet += "<a><small>" + rec.abstract + "</small></a></br>"
-    snippet += "<a><small>" + rec.location + "</small></a>"
+    snippet += "<a href='" + link_xml + "' target='_blank' id='XML'><img src='img/xml.png'></a></br>"
+    snippet += "<a><small><i id='Description'>Abstract:</i> " + rec.abstract + "</small></a></br>"
+    snippet += "<a><small><i id='Description'>Date Information:</i> " + rec.date + "</small></a></br>"
+    snippet += "<a><small><i id='Description'>Spatial Resolution:</i> " + rec.resolution + " meter</small></a></br>"
+    snippet += "<a><small><i id='Description'>Filepath:</i> " + rec.location + "</small></a>"
     snippet += "</td></tr>"
 
     return snippet
@@ -123,4 +130,16 @@ function buildCSWRequest(startPosition, bbox_enabled, freetext, startDate, endDa
     return csw_request;
 
 }
+
+function allBBOX() {
+    if (map.hasLayer(BBOX_all_Layer)) {
+        BBOX_all_Layer.clearLayers();
+    }
+    records.forEach(record => {
+        layer = BBOX2polygon(record.BBOX)
+        BBOX_all_Layer.addLayer(layer);
+        
+    });
+}
+
 
